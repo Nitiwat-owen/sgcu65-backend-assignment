@@ -2,7 +2,8 @@ package entity
 
 type Task struct {
 	Base
-	Name    string `json:"name" gorm:"index"`
-	Content string `json:"content"`
-	status  string `json:"status"`
+	Name    string  `json:"name" gorm:"index"`
+	Content string  `json:"content"`
+	status  string  `json:"status"`
+	Users   []*User `gorm:"many2many:user_tasks"`
 }
