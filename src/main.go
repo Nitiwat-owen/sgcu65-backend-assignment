@@ -54,4 +54,6 @@ func main() {
 	r.PatchTask("/:taskId", taskHandler.UpdateTask)
 	r.DeleteTask("/:taskId", taskHandler.DeleteTask)
 	r.DeleteTask("/:taskId/remove/userId", taskHandler.RemoveUser)
+
+	r.Listen(":8080")
 }

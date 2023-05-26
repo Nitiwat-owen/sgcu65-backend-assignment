@@ -10,7 +10,6 @@ type FiberRouter struct {
 
 func NewFiberRouter() *FiberRouter {
 	r := fiber.New()
-	r.Listen(":8080")
 
 	user := r.Group("/user")
 	task := r.Group("/task")
