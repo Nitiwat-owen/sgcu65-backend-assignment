@@ -6,6 +6,7 @@ import (
 	"log"
 	"sgcu65-backend-assignment/src/config"
 	"sgcu65-backend-assignment/src/database"
+	"sgcu65-backend-assignment/src/internal/repository"
 )
 
 func main() {
@@ -26,6 +27,9 @@ func main() {
 			zap.String("action", "init postgres connection"),
 		)
 	}
-
 	fmt.Println("Connected Database!!!")
+
+	userRepo := repository.UserRepositoryImpl{DB: postgresConn}
+	taskRepo := repository.TaskRepositoryImpl{DB: postgresConn}
+	userTaskRepo := repository.UserTaskRepositoryImpl{DB: postgresConn}
 }
