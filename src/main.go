@@ -1,17 +1,31 @@
 package main
 
 import (
-	"github.com/gofiber/fiber/v2"
-	"sgcu65-backend-assignment/database"
+	"fmt"
+	"go.uber.org/zap"
+	"log"
+	"sgcu65-backend-assignment/src/config"
+	"sgcu65-backend-assignment/src/database"
 )
 
 func main() {
-	// Start a new fiber app
-	app := fiber.New()
+	postgresConf, err := config.LoadDatabaseConfig()
+	if err != nil {
+		log.Fatal(
+			"failed to init postgres connection",
+			zap.Error(err),
+			zap.String("action", "init postgres connection"),
+		)
+	}
 
-	// Connect to the database
-	database.ConnectDB()
+	postgresConn, err := database.InitPostgresDatabase(postgresConf)
+	if err != nil {
+		log.Fatal(
+			"failed to init postgres connection",
+			zap.Error(err),
+			zap.String("action", "init postgres connection"),
+		)
+	}
 
-	// Listen on PORT 3000
-	app.Listen(":3000")
+	fmt.Println("Connected Database!!!")
 }
