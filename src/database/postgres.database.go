@@ -5,6 +5,7 @@ import (
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"sgcu65-backend-assignment/src/config"
+	"sgcu65-backend-assignment/src/internal/domain/entity"
 	"strconv"
 )
 
@@ -18,5 +19,9 @@ func InitPostgresDatabase(conf *config.Postgres) (db *gorm.DB, err error) {
 		return nil, err
 	}
 
+	err = db.AutoMigrate(&entity.User{}, &entity.Task{}, &entity.UserTask{})
+	if err != nil {
+		panic("fail to migrate database")
+	}
 	return
 }
