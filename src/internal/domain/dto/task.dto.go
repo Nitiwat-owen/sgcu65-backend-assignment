@@ -8,3 +8,19 @@ type TaskDto struct {
 	Deadline string    `json:"deadline" validate:"required"`
 	Users    []UserDto `json:"users"`
 }
+
+type FindTaskQueryParams struct {
+	Name string `query:"name"`
+}
+
+type UpdateTaskDto struct {
+	Name     string `json:"name"`
+	Content  string `json:"content"`
+	Status   string `json:"status"`
+	Deadline string `json:"deadline"`
+}
+
+type AssignTaskDto struct {
+	TaskId string `json:"taskId" validate:"uuid"`
+	UserId string `json:"userId" validate:"uuid"`
+}

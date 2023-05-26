@@ -170,11 +170,18 @@ func (h *Handler) UpdateUser(c *fiber.Ctx) {
 		return
 	}
 
-	user.Firstname = updateUserDto.Firstname
-	user.Surname = updateUserDto.Surname
-	user.Position = updateUserDto.Position
-	user.Salary = updateUserDto.Salary
-
+	if updateUserDto.Firstname != "" {
+		user.Firstname = updateUserDto.Firstname
+	}
+	if updateUserDto.Surname != "" {
+		user.Surname = updateUserDto.Surname
+	}
+	if updateUserDto.Position != "" {
+		user.Position = updateUserDto.Position
+	}
+	if updateUserDto.Salary != 0 {
+		user.Salary = updateUserDto.Salary
+	}
 	err = h.userRepo.UpdateUser(userId, user)
 	if err != nil {
 		c.Status(http.StatusInternalServerError).JSON(&dto.ResponseErr{
